@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema
 
-const genreSchema = mongoose.Schema({
+const genreSchema = new Schema({
     name: {
         type: String,
         required: true
@@ -11,8 +12,5 @@ const genreSchema = mongoose.Schema({
     }
 })
 
-const Genre = module.exports = mongoose.model('Genre', genreSchema)
 
-module.exports.getGenres = function(callback, limit) {
-    Genre.find(callback).limit(limit)
-}
+module.exports = mongoose.model('Genre', genreSchema)
