@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+const Schema = mongoose.Schema
 
 const BookSchema = new mongoose.Schema({
     title: {
@@ -38,11 +38,6 @@ const BookSchema = new mongoose.Schema({
 })
 
 module.exports = mongoose.model('Book', BookSchema)
-
-module.exports.getBooks = function(callback, limit) {
-        Book.getBooks(callback).limit(limit)
-    }
-    /*
     //module.exports.getBook = function(Id, callback) {
       //Book.findById(Id, callback)
     //}
