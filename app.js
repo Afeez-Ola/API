@@ -1,32 +1,38 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const Book = require('/My projects/book-store')
+
 
 const app = express();
 const bodyParser = require('body-parser');
 
 mongoose.connect('mongodb://localhost/BOOK-STORE', { useUnifiedTopology: true });
 
-Genre = require('./models/genre.js')
-Books = require('./models/book.js')
 
-const db = mongoose.connection
+mongoose.connection.on('error', err => console.error(err));
+mongoose.connection.on('connected', () => console.log("connected!"));
+
+Genre = require('./models/genre.js')
+Book = require('./models/book.js')
+
 app.get('/', (req, res) => {
     res.send('hello world!');
 });
 
-app.get('/api/genres', (req, res) => {
-    Genre.getGenres((err, genres) => {
-        if (err) {
-            throw err
-        }
+app.get('/api/genres', async(req, res) => {
+
+    try {
+        let genres = await Genre.find();
         res.json(genres);
-    })
+    } catch (err) {
+
+        console.error(err);
+        res.status(500);
+    }
 });
 
 app.get('/api/books', async(req, res) => {
     try {
-        const books = await Book.getBooks()
+        let books = await Book.find()
         res.json(books)
     } catch (err) {
         console.log(err)
