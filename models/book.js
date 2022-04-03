@@ -21,8 +21,7 @@ const BookSchema = new mongoose.Schema({
         type: String
     },
     pages: {
-        type: String,
-        required: true
+        type: String
     },
     buy_url: {
         type: String
@@ -38,7 +37,3 @@ const BookSchema = new mongoose.Schema({
 })
 
 module.exports = mongoose.model('Book', BookSchema)
-    //module.exports.getBook = function(Id, callback) {
-      //Book.findById(Id, callback)
-    //}
-    */
